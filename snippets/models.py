@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils import timezone
 
 
 # Create your models here.
@@ -15,3 +16,13 @@ class Snippet(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    text = models.TextField("本文", blank=False)
+    commented_at = models.DateTimeField("投稿日", default=timezone.now)
+    commented_to = models.ForeignKey(Snippet, verbose_name="スニペット", on_delete=models.CASCADE)
+    commented_by = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="投稿者", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.text
