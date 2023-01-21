@@ -23,4 +23,5 @@ urlpatterns = [
     # snippets/urls.py の読み込み
     path('snippets/', include('snippets.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('accounts.urls')),
 ]
